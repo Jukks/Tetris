@@ -2,8 +2,8 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    : QMainWindow(parent),
+      ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     this->setWindowTitle(WINDOW_TITLE);
@@ -17,14 +17,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui->game_graphics_view->setScene(scene_);
     scene_->setSceneRect(0, 0, GAME_SIZE_X, GAME_SIZE_Y);
 
+    game_logic = new GameLogic(ROWS, COLUMNS);
+
     for (int y=0; y<ROWS; y++){
+        std::vector<QGraphicsRectItem*> row;
+        game_grid.push_back(row);
         for(int x=0; x<COLUMNS; x++){
-            game_grid[y][x] = new QGraphicsRectItem(x*SQUARE_SIZE,
+            game_grid.at(y).push_back(new QGraphicsRectItem(x*SQUARE_SIZE,
                                                     y*SQUARE_SIZE,
                                                     SQUARE_SIZE,
-                                                    SQUARE_SIZE);
-            game_grid[y][x]->setBrush(EMPTY);
-            scene_->addItem(game_grid[y][x]);
+                                                    SQUARE_SIZE));
+            game_grid.at(y).at(x)->setBrush(EMPTY);
+            scene_->addItem(game_grid.at(y).at(x));
         }
     }
 }
@@ -34,7 +38,7 @@ MainWindow::~MainWindow()
 {
     for (int y=0; y<ROWS; y++){
         for(int x=0; x<COLUMNS; x++){
-            delete game_grid[y][x];
+            delete game_grid.at(y).at(x);
         }
     }
     delete scene_;

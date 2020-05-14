@@ -12,6 +12,10 @@
 #include <QColor>
 #include <QString>
 
+#include <vector>
+
+#include "gamelogic.hh"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -25,7 +29,7 @@ public:
     ~MainWindow();
 
     void set_block_color(int row, int column, QColor color);
-    QColor get_block_color(int row, int column);
+    QBrush get_block_color(int row, int column);
 
 private:
 
@@ -44,10 +48,12 @@ private:
     static const int ROWS = GAME_SIZE_Y / SQUARE_SIZE;
     static const int COLUMNS = GAME_SIZE_X / SQUARE_SIZE;
 
-    QGraphicsRectItem* game_grid[ROWS][COLUMNS];
+    std::vector<std::vector<QGraphicsRectItem*>> game_grid;
 
     const QString WINDOW_TITLE = "Tetris";
 
     const QColor EMPTY = QColor("white");
+
+    GameLogic* game_logic;
 };
 #endif // MAINWINDOW_HH
