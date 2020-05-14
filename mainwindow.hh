@@ -1,7 +1,16 @@
+/*
+ * Class containing the UI elements
+ */
+
 #ifndef MAINWINDOW_HH
 #define MAINWINDOW_HH
 
 #include <QMainWindow>
+#include <QGraphicsScene>
+#include <QBrush>
+#include <QGraphicsRectItem>
+#include <QColor>
+#include <QString>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,7 +24,30 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void set_block_color(int row, int column, QColor color);
+    QColor get_block_color(int row, int column);
+
 private:
+
     Ui::MainWindow *ui;
+    QGraphicsScene* scene_;
+
+    //variables indicating game position and size
+    static const int GAME_POSITION_Y = 50;
+    static const int GAME_POSITION_X = 50;
+
+    static const int GAME_SIZE_Y = 480;
+    static const int GAME_SIZE_X = 240;
+
+    static const int SQUARE_SIZE = 20;
+
+    static const int ROWS = GAME_SIZE_Y / SQUARE_SIZE;
+    static const int COLUMNS = GAME_SIZE_X / SQUARE_SIZE;
+
+    QGraphicsRectItem* game_grid[ROWS][COLUMNS];
+
+    const QString WINDOW_TITLE = "Tetris";
+
+    const QColor EMPTY = QColor("white");
 };
 #endif // MAINWINDOW_HH
