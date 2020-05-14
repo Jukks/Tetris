@@ -16,11 +16,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    gamelogic.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    tetromino.cpp
 
 HEADERS += \
-    mainwindow.hh
+    gamelogic.hh \
+    mainwindow.hh \
+    tetromino.hh
 
 FORMS += \
     mainwindow.ui
