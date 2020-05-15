@@ -1,6 +1,8 @@
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
 
+#include "gamelogic.hh"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow)
@@ -17,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->game_graphics_view->setScene(scene_);
     scene_->setSceneRect(0, 0, GAME_SIZE_X, GAME_SIZE_Y);
 
-    game_logic = new GameLogic(ROWS, COLUMNS);
+    game_logic = new GameLogic(ROWS, COLUMNS, this);
 
     for (int y=0; y<ROWS; y++){
         std::vector<QGraphicsRectItem*> row;
@@ -36,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    delete game_logic;
     for (int y=0; y<ROWS; y++){
         for(int x=0; x<COLUMNS; x++){
             delete game_grid.at(y).at(x);
@@ -43,4 +46,9 @@ MainWindow::~MainWindow()
     }
     delete scene_;
     delete ui;
+}
+
+const QBrush MainWindow::get_block_color(int row, int column)
+{
+    return game_grid.at(row).at(column)->brush();
 }

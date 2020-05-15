@@ -5,6 +5,8 @@
 #ifndef TETROMINO_HH
 #define TETROMINO_HH
 
+#include <QColor>
+
 #include <string>
 #include <vector>
 
@@ -16,6 +18,8 @@ public:
     const std::vector<std::vector<bool>> get_next_rotation();
 private:
     std::vector<std::vector<std::vector<bool>>> rotations;
+    int current_rotation;
+    QColor color;
 };
 
 #endif // TETROMINO_HH

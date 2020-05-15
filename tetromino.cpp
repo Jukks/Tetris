@@ -73,7 +73,5 @@ Tetromino::Tetromino(int type)
         break;
     }
 
-
-
-
+    current_rotation = 0;
 }

@@ -14,7 +14,7 @@
 
 #include <vector>
 
-#include "gamelogic.hh"
+class GameLogic;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -29,7 +29,7 @@ public:
     ~MainWindow();
 
     void set_block_color(int row, int column, QColor color);
-    QBrush get_block_color(int row, int column);
+    const QBrush get_block_color(int row, int column);
 
 private:
 
