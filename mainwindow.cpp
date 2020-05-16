@@ -33,8 +33,9 @@ MainWindow::MainWindow(QWidget *parent)
             scene_->addItem(game_grid.at(y).at(x));
         }
     }
-}
 
+    game_logic->start_game();
+}
 
 MainWindow::~MainWindow()
 {
@@ -46,6 +47,11 @@ MainWindow::~MainWindow()
     }
     delete scene_;
     delete ui;
+}
+
+void MainWindow::set_block_color(int row, int column, QColor color)
+{
+    game_grid.at(row).at(column)->setBrush(color);
 }
 
 const QBrush MainWindow::get_block_color(int row, int column)

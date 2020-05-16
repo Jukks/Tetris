@@ -8,12 +8,18 @@ Tetromino::Tetromino(int type)
     switch (type) {
     // L shape
     case 0:
+        /*
         rotations =
         {
             {{false, false, true},{true, true, true}},
             {{true, false},{true, false},{true, true}},
             {{true, true, true},{true, false, false}},
             {{true, true},{false, true},{false, true}}
+        };
+        */
+        rotations =
+        {
+            {{false, false, true}, {true, true, true}, {false, false, false}}
         };
         break;
     // Inverse L
@@ -73,5 +79,17 @@ Tetromino::Tetromino(int type)
         break;
     }
 
+    color = QColor("red");
+
     current_rotation = 0;
+}
+
+const std::vector<std::vector<bool> > Tetromino::get_current_rotation()
+{
+    return rotations.at(current_rotation);
+}
+
+const QColor Tetromino::get_color()
+{
+    return color;
 }

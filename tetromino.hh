@@ -16,6 +16,7 @@ public:
     Tetromino(int type);
     const std::vector<std::vector<bool>> get_current_rotation();
     const std::vector<std::vector<bool>> get_next_rotation();
+    const QColor get_color();
 private:
     std::vector<std::vector<std::vector<bool>>> rotations;
     int current_rotation;

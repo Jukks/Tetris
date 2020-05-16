@@ -33,6 +33,13 @@ private:
 
     std::default_random_engine random_gen;
     std::uniform_int_distribution<int> distr;
+
+    int origin_x;
+    int origin_y;
+
+    void place_new_tetromino();
+
+    std::vector<std::vector<int>> current_blocks;
 };
 
 #endif // GAMELOGIC_HH
