@@ -15,6 +15,7 @@ GameLogic::GameLogic(const int rows, const int columns, MainWindow* ui_)
     }
     ui = ui_;
     timer = new QTimer();
+    timer->setInterval(400);
 
     //setup random engine
     distr= std::uniform_int_distribution<int>(0, tetrominos.size()-1);
@@ -24,6 +25,12 @@ GameLogic::GameLogic(const int rows, const int columns, MainWindow* ui_)
 
     origin_y = -5;
     origin_x = -5;
+
+    xyz = false;
+
+    timer->start();
+    QObject::connect(timer, &QTimer::timeout, timer, [&](){GameLogic::move_down();});
+
 }
 GameLogic::~GameLogic(){
     for(int i=0; i<7; i++){
@@ -36,6 +43,15 @@ void GameLogic::start_game()
 {
     current_tetromino = tetrominos.at(0);
     GameLogic::place_new_tetromino();
+}
+
+void GameLogic::move_down()
+{
+    if(!xyz)
+        ui->set_block_color(0,0,QColor("brown"));
+    else
+        ui->set_block_color(0,0,QColor("blue"));
+    xyz = !xyz;
 }
 
 void GameLogic::place_new_tetromino()

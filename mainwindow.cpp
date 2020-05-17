@@ -33,8 +33,8 @@ MainWindow::MainWindow(QWidget *parent)
             scene_->addItem(game_grid.at(y).at(x));
         }
     }
-
     game_logic->start_game();
+
 }
 
 MainWindow::~MainWindow()

@@ -23,6 +23,9 @@ public:
 private slots:
     void move_down();
 private:
+
+    bool xyz;
+
     std::vector<Tetromino*> tetrominos;
     std::vector<std::vector<bool>> game_grid;
     Tetromino* current_tetromino;

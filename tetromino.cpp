@@ -19,7 +19,11 @@ Tetromino::Tetromino(int type)
         */
         rotations =
         {
-            {{false, false, true}, {true, true, true}, {false, false, false}}
+            {{false, false, true}, {true, true, true}, {false, false, false}},
+            {{false, true, true}, {false, true, false}, {false, true, false}},
+            {{false, false, false}, {true, true, true}, {false, false, true}},
+            {{false, true, false}, {false, true, false}, {true, true, false}}
+
         };
         break;
     // Inverse L

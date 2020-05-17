@@ -30,6 +30,8 @@ public:
 
     void set_block_color(int row, int column, QColor color);
     const QBrush get_block_color(int row, int column);
+public slots:
+    void testfunc();
 
 private:
 
