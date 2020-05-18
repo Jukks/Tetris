@@ -28,11 +28,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void clear_block(int row, int column);
     void set_block_color(int row, int column, QColor color);
     const QBrush get_block_color(int row, int column);
-public slots:
-    void testfunc();
-
 private:
 
     Ui::MainWindow *ui;

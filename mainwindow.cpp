@@ -49,6 +49,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::clear_block(int row, int column)
+{
+    game_grid.at(row).at(column)->setBrush(EMPTY);
+}
+
 void MainWindow::set_block_color(int row, int column, QColor color)
 {
     game_grid.at(row).at(column)->setBrush(color);

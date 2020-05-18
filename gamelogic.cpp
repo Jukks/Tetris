@@ -15,7 +15,7 @@ GameLogic::GameLogic(const int rows, const int columns, MainWindow* ui_)
     }
     ui = ui_;
     timer = new QTimer();
-    timer->setInterval(400);
+    timer->setInterval(800);
 
     //setup random engine
     distr= std::uniform_int_distribution<int>(0, tetrominos.size()-1);
@@ -43,15 +43,39 @@ void GameLogic::start_game()
 {
     current_tetromino = tetrominos.at(0);
     GameLogic::place_new_tetromino();
+    game_grid.at(6).at(0) = true;
+    ui->set_block_color(6,0,QColor("brown"));
 }
 
 void GameLogic::move_down()
 {
-    if(!xyz)
-        ui->set_block_color(0,0,QColor("brown"));
-    else
-        ui->set_block_color(0,0,QColor("blue"));
-    xyz = !xyz;
+    //return;
+    bool valid_move = true;
+    for(const std::vector<int>& v : current_blocks){
+        if(v.at(0)+1 >= int(game_grid.size())){
+            //fail - out of bounds
+            valid_move = false;
+            break;
+        }
+        if(game_grid.at(v.at(0)+1).at(v.at(1))){
+            //fail - blocked
+            valid_move = false;
+            break;
+        }
+    }
+    if(!valid_move){
+        return;
+    }
+    // Need to separate for loops in case new blocks overlap with old ones,
+    // in which case blocks get cleared
+    for(std::vector<int>& v : current_blocks){
+        ui->clear_block(v.at(0), v.at(1));
+    }
+    for(std::vector<int>& v : current_blocks){
+        v.at(0)++;
+        ui->set_block_color(v.at(0), v.at(1), QColor("red"));
+    }
+    origin_y++;
 }
 
 void GameLogic::place_new_tetromino()
